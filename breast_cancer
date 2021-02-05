@@ -1,0 +1,182 @@
+First we import liberaries:- numpy(for numeric calculations), pandas(for data manupulation and analyze), matplot (for data visualisation), seaborn(also for data visualisation), datasets(to load breast cancer data)
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+import seaborn as sns # pip install --upgrade seaborn
+from sklearn.preprocessing import StandardScaler
+#importing different classifiers
+from sklearn.svm import SVC #support vector classifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+#importing more packages after when we have cleaned data and we are ready to apply different algo
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+# 
+from sklearn.model_selection import cross_val_score
+
+from sklearn import model_selection
+
+
+data = load_breast_cancer()
+#data
+#type(data)
+###output - sklearn.utils.Bunch (means dictionary)
+#data.keys()
+#data['data']
+###output - its a 2-D array
+type(data['data'])
+#data is our variable./['data'] is key of dataset
+###output - numpy.ndarray
+data['target']
+type(data['target'])
+###output - numpy.ndarray
+data['target_names']
+#target_name - is one of the key of dataset
+#'malignant' - means 0 (cancer), 'benign'- means 1(no cancer)
+###output - array(['malignant', 'benign'], dtype='<U9')
+data['DESCR']
+###output - Number of Instances: 569 (means total 569 patients information we have)(out of 569 some are infected some not)
+#       -Number of Attributes: 30 numeric
+data['feature_names']
+# features are in numeric form.
+# experts of cancer took cell of tumour and store its values in form of mean/error/worst features form 
+data['filename']
+#when we call this breast cancer file (dataset) its store in this path in form of .csv
+
+
+Now, creating a dataframe(means combining keys and values = (data & target).only after creating DATAFRAME we can apply our ML algo on it.
+so creating DATAFRAME is imp. we give our dataframe 2 columns name with the help of feature_names/target
+
+#while creating df showing error(below 2 lines)
+df=pd.DataFrame(np.c_[data['data'],data['target']],
+columns=np.append(data['feature_names'],data['target']))
+ValueError: Shape of passed values is (569, 31), indices imply (569, 599)
+
+#So,creating df with a function
+def answer():
+    df = np.c_[data.data, data.target]
+    columns = np.append(data.feature_names,['target'])
+    return pd.DataFrame(df, columns=columns)
+
+dframe = answer()
+#if condition returns False, AssertionError is raised:
+assert dframe.shape == (len(data.target), 31) #dataframe shape == data[target] 
+###now no error
+
+
+Now,converting dataframe to .csv file (.csv file is imp. for making ML model)
+dframe.to_csv('breast_cancer_dataframe.csv')
+
+dframe.head()
+dframe.tail()
+dframe.info()
+dframe.describe()
+
+NOW, pair plot
+#sns.pairplot(dframe, hue='target') #this line takes too much time to execute so commented
+S0, did this with few features:-
+sns.pairplot(dframe, hue='target',vars=['mean radius','mean texture','mean perimeter','mean area','mean smoothness'])
+#### FROMABOVE PAIRPLOT WE CAN EASILY SEE THAT THOSE PATIENTS HAVING MALIGNANT CANCER THEY HAVE MORE (mean area),(mean radius),(mean perimeter)
+
+NOW,sns.countplot(dframe['target'])
+NOW,sns.countplot(dframe['mean radius'])
+plt.figure(figsize=(20,6))
+#### IN THE ABOVE COUNTPLOT PLOT OF MEAN RADIUS WE CAN EASILY SEE THAT MALIGNANT PATIENTS HAVE MORE RADIUS THAN BELIGN PATIENTS.
+
+NOW,# splitting into train and test
+X=dframe.drop(['target'],axis=1)
+#X.head()
+
+Y=dframe['target']
+#Y.head(20)
+
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=5)
+#X_train
+#X_test
+#Y_train
+#Y_test
+
+NOW,FEATURES SCALING because every feature is in different unit so scaling convert them in single unit.(we can use normalized scaling or standard scaling)
+HERE WE ARE USING STANDARD SCALING:-
+sc=StandardScaler()
+X_train=sc.fit_transform(X_train)
+X_test=sc.transform(X_test)
+
+NOW, model selection
+
+svc_classifier=SVC()
+svc_classifier.fit(X_train,Y_train)
+Y_predict_svc=svc_classifier.predict(X_test)
+accuracy_score(Y_test,Y_predict_svc)
+
+lrclassifier=LogisticRegression(random_state=0)
+lrclassifier.fit(X_train,Y_train)
+Y_predict_lr=lrclassifier.predict(X_test)
+accuracy_score(Y_test,Y_predict_lr)
+
+dtclassifier=DecisionTreeClassifier(random_state=0)
+dtclassifier.fit(X_train,Y_train)
+Y_predict_dt=dtclassifier.predict(X_test)
+accuracy_score(Y_test,Y_predict_dt)
+
+rvclassifier=RandomForestClassifier(random_state=0)
+rvclassifier.fit(X_train,Y_train)
+Y_predict_rv=rvclassifier.predict(X_test)
+accuracy_score(Y_test,Y_predict_rv)
+
+knclassifier=KNeighborsClassifier(n_neighbors=5)
+knclassifier.fit(X_train,Y_train)
+Y_predict_kn=knclassifier.predict(X_test)
+accuracy_score(Y_test,Y_predict_kn)
+
+NOW,using confusion matrix to chk whether model is overfit/underfit. as we have small data so can't say its over or under fit.
+cm=confusion_matrix(Y_test,Y_predict_lr)
+print(cm)
+
+cm=confusion_matrix(Y_test,Y_predict_lr)
+plt.title('Heatmap of confusion matrix',fontsize=15)
+sns.heatmap(cm,annot=True) #If annot is set to True, the text will be written on each cell.
+plt.show()
+
+NOW, CLASSIFIACTION REPORT TO PRINT(precision    recall  f1-score   support)
+print(classification_report(Y_test,Y_predict_lr))
+
+NOW.USING CROSS VALIDATION CHECK OF ML MODEL (to chk whether our model is under/overfit/or generalized model
+#cross validation of model to chk our model is over fit or under fit
+crvalidation=cross_val_score(lrclassifier,X_train,Y_train,cv=3,scoring='accuracy')
+
+crvalidation.mean()
+
+# so we check by fit/train different classifiers
+# we choose LogisticsRegression clf bec of more accuracy
+# then we use confusion matrix to chk precision/recall/f1-score/
+# then we chk whether our model is over-fit or under-fit with help of CROSS VALIDATION SCORE.whose mean is 97%. which means our clf is perfect not over/under fit.
+###### NOW SAVE THE MODEL TO DISK..../DEPLOY THE MODEL/DUMP THE MODEL######
+# for this we can use any 2 packages:-
+#1- pickel
+#2-joblib
+
+#import joblib
+#filename = 'breast'
+#joblib.dump(lrclassifier, filename) ##using lrclassifier because it gives more accuracy
+
+#model is dump with the name of (breast.joblib)
+from joblib import dump,load
+dump(lrclassifier,'breast.joblib')
+
+#now below load our model
+model=load('breast.joblib')
+
+#now predict
+
+y_predict=model.predict(X_test)#x_test will be the values/features(30)/extracted numeric value of tumour cel/l of new coming patients to predict cancer
+                               # if y_predict = 0 means patient have mal. cancer/ 1 means they have not any cancerthey have only benign tumour
+
+####### below these 2 lines showing syntax error(because values inside the braces is not 30 its 20 only#########
+
+#y_predict=np.array([[15.30	25.27	102.40	732.4	0.10820	0.16970	0.16830	0.08751	0.1926	0.06540	...	20.27	36.71	149.30	1269.0	0.1641	0.61100	0.63350	0.20240	0.4027	0.09876]])
+#model.predict(y_predict)
+
