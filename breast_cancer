@@ -1,3 +1,6 @@
+uci ml repository datasets/chosing name-breast cancer/click on data folder/index of breast cancer will open/download (.data) and (.names) file/make their(.csv file) to make ML model.
+or use sklearn.datasets to import (any dataset)
+
 First we import liberaries:- numpy(for numeric calculations), pandas(for data manupulation and analyze), matplot (for data visualisation), seaborn(also for data visualisation), datasets(to load breast cancer data)
 import numpy as np
 import matplotlib.pyplot as plt
