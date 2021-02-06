@@ -1,0 +1,10 @@
+1. Most people abbreviate pandas in their code as pd
+ numpy as np
+ etc............
+2. The most important part of the Pandas library is the DataFrame. A DataFrame holds the type of data you might think of as a table.
+ This is similar to a sheet in Excel, or a table in a SQL database.
+ in the .csv form.
+3.Many machine learning models allow some randomness in model training. Specifying a number for random_state ensures you get the same results in each run. This is considered a good practice.
+You use any number, and model quality won't depend meaningfully on exactly what value you choose.
+4.
+ 
