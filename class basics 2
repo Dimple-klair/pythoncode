@@ -1,0 +1,34 @@
+class Student:
+    leaves = 5 #this is for every student/written in template
+    pass
+
+#both harr and larr derived from same - class Student/
+harr=Student()
+larr=Student()
+
+#below are the instances of Student class:-
+harr.name='har'
+harr.salary='10'
+
+larr.name='lar'
+larr.salary='20'
+
+#below we can print/ACCESS LEAVES(variable of Student class) with the help of INSTANCES(harr or larr) OR (CLASS STUDENT)
+print(Student.leaves)
+#output- 5
+print(harr.leaves)
+#output- 5
+print(larr.leaves)
+##output- 5
+
+#now if we want to change leaves we can only change it with the help of (CLASS STUDENT) only:- BECAUSE leaves is the property of class Student only
+Student.leaves=10
+print(Student.leaves)
+#now output- 10
+
+
+
+#but HARR/LARR can change his leaves(others property) with the help of an attribute - (.__dict__)
+harr.leaves = 30
+print(harr.__dict__)  #it returns a dictionary
+#output- {'name': 'har', 'salary': '10', 'leaves': 30}
