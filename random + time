@@ -1,0 +1,11 @@
+#################################for random ###############################
+import random
+rand=random.random() * 10
+print(rand)
+
+
+
+###########################for timing ########################3
+import time
+localtime= time.asctime(time.localtime(time.time()))
+print(localtime)
