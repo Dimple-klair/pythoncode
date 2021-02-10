@@ -1,0 +1,13 @@
+#now CONSTRUCTOR IN A CLASS
+#__init__
+
+
+
+class Student:
+    def __init__(self,name,clas,salary):  #here self = harr
+        # here we can accept arguments
+        self.name=name
+        self.clas=clas
+        self.salary=salary
+harr = Student('har',2,100)               #V V IMP---- THESE ARGUMENT ARE GOING TO __INIT__
+print(harr.salary)
