@@ -1,0 +1,16 @@
+#class name always starts with capital letters:-
+class Student:
+    pass
+
+#below are the 2 objects of class student:-
+harry = Student() # 1st instance of student object derived from student class
+larry = Student() # another instance of student object derived from student class
+
+#below are the instance variables of objects given above:-
+harry.name='har'
+harry.clas='2'
+harry.sub=['eng','hin']
+larry.name='lar'
+larry.clas="2"
+larry.sub=['hin','eng']
+print(harry.sub,larry.clas)
