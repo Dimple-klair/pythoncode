@@ -1,0 +1,11 @@
+m=15
+def func():
+    m=5
+    def funct():
+      global m
+      m=m+10
+    print(m)
+    funct()
+    print('after call funct()', m)
+func()
+print(m)
