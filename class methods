@@ -1,0 +1,25 @@
+# now learn about METHODS in class & removing PASS(we write pass when we donot implement anything)
+
+class Student:
+    leaves=5
+    def print_details(self):  # self means k jis object ki baat ki jaa rhi hai.agar harr ka object bnaye(harr.print_details) tb self means (harr) hoga
+        return (f'this is {self.name}, his clas is {self.clas}, and his salary is {self.salary}') #self. means wo object jis par ye function lagega(def print_details(self))
+
+
+harr=Student()
+larr=Student()
+
+harr.name='har'
+harr.clas='2'
+harr.salary='10'
+
+larr.name='lar'
+larr.clas='3'
+larr.salary='20'
+
+print(harr.print_details()) #ab yahan automatically self=harr ho jayega as an ARGUMENT
+#print_details() k andar harr jaa chuka hai with the help of self. and harr ki details print ho jayegi
+########output- this is har, his clas is 2, and his salary is 10
+
+
+##################### so like this we can print details of any instances of our class ################################
