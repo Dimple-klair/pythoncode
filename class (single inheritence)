@@ -1,0 +1,36 @@
+                                     ########## SINGLE INHERITENCE ############
+
+class Student:                                                                      ### PARENT CLASS ###
+    leaves=5                                                                        ### PARENT CLASS VARIABLE ###
+    def __init__(self,aname,aclas,asalary):                                         ### PARENT CLASS CONSTRUCTOR ###
+        self.name= aname#aname is argument and name is instance varible
+        self.clas=aclas
+        self.salary=asalary
+
+    def printdetails(self): #instance of class ko self se access karenge             ### PARENT CLASS METHOD ###
+        return (f'this is {self.name}, clas is {self.clas}, salary is {self.salary}')
+
+class Programmer(Student):                                                           ### INHERIT THE Student class ###
+    def printprog(self):                                                             ### METHOD OF INHERIT CLASS ###
+        return(f'programmer is {self.name}, clas is {self.clas}')
+
+harr=Student('har',2,100) #these arg are going to init                               ### TWO INSTANCES OF STUDENT CLASS ###
+larr=Student('lar',2,200)
+
+marr=Programmer('mar',3,200)                                                         ### TWO INSTANCES OF PROGRAMMER CLASS ###
+karr=Programmer('kar',3,400)
+
+print(marr.printprog())                                                              ### PRINTING DETAILS OF PROG CLASS ###
+#print(marr.printdetails())                                                          ### PRINTING DETAILS OF STUD CLASS ###
+
+#print(larr.salary)
+
+# harr.name='har'
+# harr.clas='2'
+# harr.salary='100'
+# larr.name='lar'
+# larr.clas='3'
+# larr.salary='200'
+
+##print(harr.printdetails()) #yahan pe harr ki details ayegi
+
