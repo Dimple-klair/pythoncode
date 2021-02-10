@@ -1,0 +1,14 @@
+def func(normal, *arg, **kwargs):  #
+    print(normal)                 # no loop bec its a simple string"hello"
+    print('these are args')
+    for i in arg:                   #using loop bec its a list
+        print(i)
+    print('these are kwargs')
+    for key,value in kwargs.items():     # using loop bec its a dict.
+        print(key,value)
+
+
+normal='hello'
+argument=['a','b','c'] #a b c are all elements
+kwarguments={'dog':'dog', 'egg':'egg', 'fan':'fan','gun':'gun'} # we can add new entries/info of new staff (key:value)we want to
+func(normal,*argument,**kwarguments) #calling our function
