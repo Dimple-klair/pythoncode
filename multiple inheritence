@@ -1,0 +1,35 @@
+class Student:
+    leaves=10
+    def __init__(self,aname,aclas,asalary):
+        self.name=aname
+        self.clas=aclas
+        self.salary=asalary
+    def printdetails(self):
+        return f'name is {self.name}, clas is {self.clas},salary is {self.salary}'
+
+class Player:
+    games=4
+    def __init__(self,name,game):
+        self.name=name
+        self.game=game
+    def pintinfo(self):
+        return f'player is {self.name}, loves to play {self.game}'
+
+class Coolstudents(Student,Player):    # this is multiple inheritence
+    pass
+    #lang='c++'
+    #def printlanguage(self):
+     #   print(f'he knows {self.lang}')
+
+harr=Student('har',2,200)
+larr=Student('lar',2,100)
+
+karr=Player('kar','cricket')
+
+marr=Coolstudents('mar',2,200)  #name clas and salary is given here in argument.its imp bec /n
+# marr is going to Student class constructor first and finding (name clas salary)/n
+# so these arguments are imp to write in 3rd class
+
+
+detail= marr.printdetails()
+print(detail)
