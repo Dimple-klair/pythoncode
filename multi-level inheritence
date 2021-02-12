@@ -1,0 +1,18 @@
+class Dad:
+    dance=1
+    #basketball=2
+
+class Son(Dad):
+    dance=2
+    play=0
+    def isdance(self):
+         return f'i love dance {self.dance} times daily'
+
+class Grandson(Son):
+    pass
+    #dance=3
+
+harr=Dad()
+larr=Son()
+marr=Grandson()
+print(marr.isdance())
