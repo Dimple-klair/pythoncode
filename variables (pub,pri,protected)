@@ -1,0 +1,20 @@
+# public var= can be used by everyone. used in any class.
+# protected var= can be used by parent as well as child class.(_protected)
+# private var= can be used by only parent class(__private) CALLED NAME ANGLING
+#### TO ACCESS = to access private class we use:- print(instance of class,_class name__private)
+
+class Student:
+    leaves=5 #public outside house 
+    _prot=2  #protected var inside house
+    __pri=10 #private var inside room
+
+    def __init__(self,aname,asalary):
+        self.name=aname
+        self.salary=asalary
+    def printdetails(self):
+        return f'name is {self.name}, salary is {self.salary}'
+
+harr=Student('har',200)
+#print(harr.leaves)               # public var, normally we print like this
+#print(harr._prot)               # to access protected var we write/print like this
+#print(harr._Student__pri)        #to access private variable 
