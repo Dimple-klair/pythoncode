@@ -1,0 +1,16 @@
+####reading pdf file(invoice)and grabing total price:-
+
+import requests
+import pdfplumber
+with pdfplumber.open('invoice.pdf') as pdf:
+    page = pdf.pages[1]
+    text = page.extract_text()
+
+# print(text)
+
+for row in text.split('\n'):
+    if row.startswith('Total EUR'):
+        balance = row.split()[-1]
+
+#print(balance)
+
